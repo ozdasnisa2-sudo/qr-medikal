@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#102c46">
+<title>QR Medikal | Demo</title>
+<style>
+:root{--navy:#102c46;--teal:#167c72;--bg:#f3f6f8;--ink:#172b3a;--muted:#687987;--line:#e1e8ed;--red:#b42335;--amber:#9a6500}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px 17px 20px;position:sticky;top:0;z-index:3;box-shadow:0 3px 14px #102c4620}
+.brand{font-weight:800;letter-spacing:.4px;font-size:17px}.sub{font-size:12px;color:#c8d9e5;margin-top:4px}
+main{max-width:720px;margin:auto;padding:16px 14px 40px}.notice{background:#fff6df;border:1px solid #efd28b;color:#654800;padding:11px 12px;border-radius:13px;font-size:12px;line-height:1.45;margin-bottom:14px}
+.card{background:white;border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:13px;box-shadow:0 2px 8px #102c4608}
+h1{font-size:23px;margin:4px 0 14px}h2{font-size:17px;margin:0 0 12px}.muted{color:var(--muted);font-size:12px}
+button,input{font:inherit}button{border:0;border-radius:12px;padding:12px 14px;font-weight:700;cursor:pointer}
+.primary{background:var(--teal);color:white}.secondary{background:#e9f1f4;color:var(--navy)}.danger{background:#fff0f1;color:var(--red)}.wide{width:100%}
+input{width:100%;border:1px solid #ccd7df;border-radius:12px;padding:13px;margin:8px 0 11px;background:white}
+.row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}.grow{flex:1;min-width:0}
+.patient{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.patient:last-child{border:0}
+.avatar{width:42px;height:42px;border-radius:14px;background:#e7f3f1;color:var(--teal);display:grid;place-items:center;font-weight:800}
+.badge{display:inline-block;border-radius:30px;padding:5px 9px;font-size:11px;font-weight:800;background:#e8f5ef;color:#167247}
+.badge.red{background:#ffebed;color:#ae2433}.badge.blue{background:#eaf1ff;color:#2859a5}
+.field{padding:12px 0;border-bottom:1px solid var(--line)}.field:last-child{border:0}.label{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.5px}.value{font-size:15px;font-weight:650;margin-top:4px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tile{background:#f7f9fa;border-radius:13px;padding:12px}.tile .value{font-size:16px}
+.hidden{display:none!important}.tabs{display:flex;gap:8px;margin-bottom:14px}.tabs button{flex:1}.qrimg{width:150px;height:150px;object-fit:contain;background:white;border:1px solid var(--line);border-radius:12px;padding:7px}
+footer{font-size:11px;color:var(--muted);text-align:center;padding:15px}
+video{width:100%;border-radius:14px;background:#0d1d2b;max-height:330px;object-fit:cover}
+@media(max-width:380px){.grid{grid-template-columns:1fr}.tabs button{padding:10px 8px;font-size:12px}}
+</style>
+</head>
+<body>
+<header><div class="brand">♥ QR MEDİKAL</div><div class="sub">Hasta bilgi ve acil durum demo uygulaması</div></header>
+<main>
+<div class="notice"><b>DEMO / GERÇEK HASTA VERİSİ DEĞİLDİR.</b> Bu sürüm yalnızca arayüz ve akış denemesidir. Giriş bilgileri örnek amaçlıdır; gerçek personel doğrulaması, e‑Nabız veya Emniyet bağlantısı içermez. Gerçek T.C. kimlik numarası veya sağlık bilgisi girmeyin.</div>
+
+<section id="login" class="card">
+  <h1>Personel girişi</h1>
+  <p class="muted">Devam etmek için personel bilgilerini gir.</p>
+  <label for="staffTc" class="label">PERSONEL T.C. KİMLİK NUMARASI</label>
+  <input id="staffTc" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="11 haneli T.C. kimlik numarası">
+  <label for="staffCode" class="label">BAKANLIĞIN VERDİĞİ KOD</label>
+  <input id="staffCode" inputmode="numeric" autocomplete="off" placeholder="Personel kodu">
+  <button class="primary wide" onclick="loginStaff()">Giriş yap</button>
+  <p id="loginMsg" class="muted" role="status" style="margin-bottom:0">Demo giriş bilgileri uygulama içi test içindir.</p>
+</section>
+
+<section id="app" class="hidden">
+  <div class="row between" style="margin-bottom:12px"><div><div class="muted">PERSONEL PANELİ</div><h1 style="margin:2px 0">Hasta kayıtları</h1></div><button class="secondary" onclick="logout()">Çıkış</button></div>
+  <div class="tabs"><button class="primary" id="tabList" onclick="showTab('list')">Hastalar</button><button class="secondary" id="tabScan" onclick="showTab('scan')">QR okut</button></div>
+  <section id="listView" class="card">
+    <input id="search" placeholder="Hasta adıyla ara..." oninput="renderList()">
+    <div id="patientList"></div>
+  </section>
+  <section id="scanView" class="card hidden">
+    <h2>QR kod okutma</h2>
+    <p class="muted">Kamera izni ver. Demo QR etiketlerinden birini kameraya göster.</p>
+    <video id="video" playsinline muted></video>
+    <div class="row" style="margin-top:10px"><button class="primary grow" onclick="startScan()">Kamerayı aç</button><button class="secondary" onclick="stopScan()">Durdur</button></div>
+    <p id="scanMsg" class="muted">Kamera henüz açılmadı.</p>
+    <div class="muted">Kamera veya QR algılama bu tarayıcıda desteklenmiyorsa aşağıdaki demo hasta listesinden profili açabilirsin.</div>
+  </section>
+  <section id="detailView" class="hidden"></section>
+</section>
+<footer>QR Medikal • Öğrenci proje prototipi • v0.1</footer>
+</main>
+<script>
+const patients = [{"id": "1", "name": "Zeynep Yılmaz", "blood": "A Rh(+)", "disease": "Epilepsi", "allergy": "Penisilin", "meds": "Epilepsi tedavisinde reçete edilen ilaç", "contact": "Ayşe Yılmaz (Anne)", "phone": "05XX XXX XX 01", "token": "QRMED-DEMO-7F3A91", "qr": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAIAAAAA4vtyAAACLklEQVR4nO3dwW7jMAwA0bro//9yetdBAUGKQyXzrllknYEAQqnsPK/X60ftfukL+FJ2Z9idYXeG3Rl2Z9idYXeG3Rl/+5ef5+m5jv22OXMZyzsP+USud4bdGXZn2J3xZq4uCr80Ds23/WzMXBX1iVzvDLsz7M6wOyM2VxeZ2Rh659BuNjMqz32iheudYXeG3Rl2Z6Tmapv9uLvx6JXrnWF3ht0ZdmfcMVczf32dOXVd7wy7M+zOsDsjNVfbRlZochYecjrH9c6wO8PuDLszYnO17TDt4tyZXuoTud4ZdmfYnWF3xjPza9LCcTfzA7reGXZn2J1hd0bs/tVz+8blnTM31uyvasjEdr0z7M6wO8PujNh+NTRmM6/uFR5josas651hd4bdGXZnvJmrmaO25578UDg52/7xwvXOsDvD7gy7Myr3q6nrSOx1M/9RSOHjKVzvDLsz7M6wO6Py3FLbDS5tN6xmtq/O1YnszrA7w+6MK88DZ/aNbRvjPdc7w+4MuzPszhj6ezb7cdc2/RaFh6tc7wy7M+zOsDtj6O/ZFJ5bKlT4zq53ht0ZdmfYnTH092wyCs/0+vfVT2N3ht0Zdmfc8dz9zBe/5+7gCb26cL0z7M6wO8PujDvmakho+p3bke653hl2Z9idYXfG0N+zKfy2tpD3r17P7gy7M+zOSD1vqVDb4wXbnqi053pn2J1hd4bdGUPvX/14rneG3Rl2Z9idYXeG3Rl2Z9idYXfGP/xyCPBeVSjOAAAAAElFTkSuQmCC"}, {"id": "2", "name": "Elif Demir", "blood": "0 Rh(-)", "disease": "Tip 1 diyabet", "allergy": "Lateks", "meds": "İnsülin", "contact": "Murat Demir (Baba)", "phone": "05XX XXX XX 02", "token": "QRMED-DEMO-2B8C44", "qr": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAIAAAAA4vtyAAACNElEQVR4nO3dS27DMAwA0bro/a+c7rWgQVDUUO28bdN8BgIIy3byfD6fLx33Tb+Bf8ruDLsz7M6wO8PuDLsz7M6wO+Mn/vPzPGfex3LYvLxufFBdeXCf+G243hl2Z9idYXfGy1xdbNw0judbZcymHPtEC9c7w+4MuzPszsjN1UVqklQmWGrMVobwsU/kemfYnWF3ht0Zpbnap7Jbe8WVWK53ht0ZdmfYnTF0rsbiA9T4wUO43hl2Z9idYXdGaa4eG1mVfeDKC/VxvTPszrA7w+6M3Fw9djHtMdQncr0z7M6wO8PujGfmNmnfBcBDuN4ZdmfYnWF3xstc3Xht7cbd2kXfM8cvtEi1cr0z7M6wO8PuDOy6pRvPzW48ina9M+zOsDvD7oyXuVq5NbRy1W7fHaqx1BFp5cDY9c6wO8PuDLszcvvAsY3fRRg/c+p/Uyo7ve4DX8DuDLsz7M7A9oH7Bmnfxm/819Rhs+udYXeG3Rl2Z9xxPXCs7+7WvmNs1zvD7gy7M+zOGPp7NimVQdp3OXTM9c6wO8PuDLsz7vg9m8pTbeT1wNezO8PuDLszhv6ezcZn3nhCNX6w51cvYHeG3Rl2Zwz93v3KSdF43G083RrfduP51YnszrA7w+6MoXN1URlox+65TXG9M+zOsDvD7ow7fs+m78qkvrfh8epEdmfYnWF3xtDfs6ncOHrsu5r8vqX72J1hd4bdGUPvX/3zXO8MuzPszrA7w+4MuzPszrA7w+6MX0X5AxGa8pR6AAAAAElFTkSuQmCC"}, {"id": "3", "name": "Ayşe Kaya", "blood": "B Rh(+)", "disease": "Astım", "allergy": "Aspirin", "meds": "Reçeteli astım kontrol ilacı", "contact": "Fatma Kaya (Anne)", "phone": "05XX XXX XX 03", "token": "QRMED-DEMO-9D1E62", "qr": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAIAAAAA4vtyAAACOElEQVR4nO3dS24jMQwA0SjI/a/c2WvBBkFKJdn1tpmx3QUBRP/H8zw/2u6X/gFfyu4MuzPszrA7w+4MuzPszrA74y/+8xhjz++Ydpsr3xvvgVNbNHG9M+zOsDvD7oyXuTppPGgcz7fKmJ3+cfybt23RxPXOsDvD7gy7M3JzdZKaJI0TbN0e6bYtcr0z7M6wO8PujNJcXWfb0VqK651hd4bdGXZnHDpXU24cwq53ht0ZdmfYnVGaq9Q9OvEZ1HXXPDVyvTPszrA7w+6M3Fyl9gwbJ+eE2iLXO8PuDLsz7M4YZz4XInW18I1c7wy7M+zOsDsjd/9qaqA1Hq2tfG+j1HXI3r96Irsz7M6wO+NlrsbDcN2YbZxgqS+KZ3Jl8yeud4bdGXZn2J1Rei5E5WhtZZCmNO4YTx9V+VWud4bdGXZn2J3ReRx43SDdNnVTu6CVI9uud4bdGXZn2J3xct3SIU/Tja07kbvuJLDrnWF3ht0ZdmfccT1w4znSdYeyU//X9c6wO8PuDLszDn2fTepnNI7Z1CdXuN4ZdmfYnWF3xh3vs9n2Uakv8nrg+9idYXeG3RmHvs9m3QXAjeeTK2PW9c6wO8PuDLszDn3ufuPdrbHGq5p8LsQF7M6wO8PujEPn6qRyFnTd9cAeB76P3Rl2Z9id8Qnvs4n/uu38qvurF7A7w+4MuzMOfZ9NPKMan67YeN9siuudYXeG3Rl2Zxx6/+rHc70z7M6wO8PuDLsz7M6wO8PuDLsz/gGA8e4ddPVb9gAAAABJRU5ErkJggg=="}, {"id": "4", "name": "Mehmet Yıldız", "blood": "AB Rh(+)", "disease": "Hemofili A", "allergy": "Fındık", "meds": "Pıhtılaşma faktörü tedavisi", "contact": "Ahmet Yıldız (Baba)", "phone": "05XX XXX XX 04", "token": "QRMED-DEMO-5A6F10", "qr": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAIAAAAA4vtyAAACPUlEQVR4nO3dS27DMAwA0aro/a/s7rWgQVDiSMm8bZE4GQhg/Yk9nuf5Ubtf+gN8Kbsz7M6wO8PuDLsz7M6wO8PujL/4z2OMns8x7TbH2433safXpt55ofhDut4ZdmfYnWF3xstcnSw8aLxwcla0faOJ651hd4bdGXZn5ObqJDVJFk6wfbugbd/I9c6wO8PuDLszSnN1n8re7BVXYrneGXZn2J1hd8ahc3WS2kGNz68ewvXOsDvD7gy7M0pztW1kpUZl5bBw2zdyvTPszrA7w+6M3Fxtu5h2Eu+vVoYh9Y1c7wy7M+zOsDtjnHmY9IpjuRWud4bdGXZn2J3xMlcr823f70jbfoVT2a6/Xz2R3Rl2Z9id8XIcuO1MZuqtUhMsdQy57Yoo1zvD7gy7M+zOKJ1frey+ThZOv9R2448Rv1Xl3wrXO8PuDLsz7M7I3cdw4fSrXIpUGbMLL4GqfAzXO8PuDLsz7M7InV9NaZt+C3duF7425npn2J1hd4bdGR94PfC+MRtvKPVa1zvD7gy7M+zOOPR5NrHKEebUdvf93Mf1zrA7w+4MuzPueJ7NwhO5FV4PfD27M+zOsDvj0OfZtF0vFW83VhmzrneG3Rl2Z9idceh99/ed9d13JZb3hbiA3Rl2Z9idcehcnVRu10Dt+sZc7wy7M+zOsDvjjufZtN2uIVYZ0RPXO8PuDLsz7M449Hk2bXcqpJ6F43pn2J1hd4bdGYf+fvXjud4ZdmfYnWF3ht0ZdmfYnWF3ht0Z/8ITCR0KyR3uAAAAAElFTkSuQmCC"}, {"id": "5", "name": "Mustafa Çelik", "blood": "A Rh(-)", "disease": "Kronik böbrek hastalığı", "allergy": "Sülfonamid grubu", "meds": "Reçeteli böbrek tedavisi ilaçları", "contact": "Emine Çelik (Anne)", "phone": "05XX XXX XX 05", "token": "QRMED-DEMO-8C3D75", "qr": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAIAAAAA4vtyAAACPUlEQVR4nO3dzU4DMQwAYRbx/q+83HNwZTn2JDDftUDpyFK06f487/t+adw3/Q/8U3Zn2J1hd4bdGXZn2J1hd4bdGT/xy8/zzPwfy2Hz8r7xQXXlh/vE/4bzzrA7w+4MuzM+rKuLjZvG8foWL7PxD6eMfaKF886wO8PuDLszcuvqIrWS9H2Ru3HVHftEzjvD7gy7M+zOKK2rfeKt3dTG75mcd4bdGXZn2J1x6Lq6iA8j+3aJ+zjvDLsz7M6wO6O0ro4tWanj1cqZSWOfyHln2J1hd4bdGbl1dexk2jHUJ3LeGXZn2J1hd8Zz5jbpjVu7Kc47w+4MuzPszshdv1o5t3bjbm3qfTfaeBmt886wO8PuDLszcserlcPIvrs3VL59raz2lbOUnXeG3Rl2Z9idsfN+S303SaqsfhsvSV3+VOXA2Hln2J1hd4bdGR/W1b5vMlMLaaxy66bKRndltXfeGXZn2J1hd0ZpH7hvLzf1vmOvxlIlnXeG3Rl2Z9idceX5wIvKzYQ3fmOc+l3nnWF3ht0Zdmcc+jyb+NW+vdxF3w0TnXeG3Rl2Z9idccfzbM78y953/z52Z9idYXfGoc+zqZwtXNF3/vPCeWfYnWF3ht0Zh953f+OFNWMXynr96gXszrA7w+6MQ9fVlI0PlRt7nrrzzrA7w+4MuzOufJ7NYuxmwhsXcOedYXeG3Rl2Zxz6PJuxa1/7TpCKOe8MuzPszrA749DrV/88551hd4bdGXZn2J1hd4bdGXZn2J3xCwiTAxFmGPhdAAAAAElFTkSuQmCC"}];
+let current = null, stream = null, detector = null, scanLoop = false;
+function loginStaff(){
+ const tc=document.getElementById('staffTc').value.trim();
+ const code=document.getElementById('staffCode').value.trim();
+ const msg=document.getElementById('loginMsg');
+ if(tc==='12345678912' && code==='1032'){
+  msg.textContent='Demo personel girişi başarılı.';
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  renderList();
+ }else{
+  msg.textContent='Bilgiler eşleşmedi. Demo bilgilerini kontrol et.';
+ }
+}
+function enterApp(){loginStaff();}
+function logout(){
+ stopScan();
+ document.getElementById('app').classList.add('hidden');
+ document.getElementById('login').classList.remove('hidden');
+ document.getElementById('detailView').classList.add('hidden');
+ document.getElementById('staffTc').value='';
+ document.getElementById('staffCode').value='';
+ document.getElementById('loginMsg').textContent='Demo giriş bilgileri uygulama içi test içindir.';
+}
+function showTab(which){
+ stopScan();document.getElementById('listView').classList.toggle('hidden',which!=='list');document.getElementById('scanView').classList.toggle('hidden',which!=='scan');document.getElementById('detailView').classList.add('hidden');
+ document.getElementById('tabList').className=which==='list'?'primary':'secondary';document.getElementById('tabScan').className=which==='scan'?'primary':'secondary';
+}
+function renderList(){
+ const q=(document.getElementById('search').value||'').toLocaleLowerCase('tr');
+ document.getElementById('patientList').innerHTML=patients.filter(p=>p.name.toLocaleLowerCase('tr').includes(q)).map(p=>`
+ <div class="patient"><div class="avatar">${p.name.split(' ').map(x=>x[0]).slice(0,2).join('')}</div><div class="grow"><b>${p.name}</b><div class="muted">Demo hasta no: ${p.id}</div></div><button class="secondary" onclick="openPatient('${p.id}')">Aç</button></div>`).join('')||'<p class="muted">Kayıt bulunamadı.</p>';
+}
+function openPatient(id){
+ stopScan();current=patients.find(p=>p.id===id);if(!current)return;
+ document.getElementById('listView').classList.add('hidden');document.getElementById('scanView').classList.add('hidden');document.getElementById('detailView').classList.remove('hidden');
+ document.getElementById('tabList').className='secondary';document.getElementById('tabScan').className='secondary';
+ renderDetail();
+}
+function renderDetail(){
+ const p=current;
+ document.getElementById('detailView').innerHTML=`
+ <div class="row between" style="margin-bottom:12px"><button class="secondary" onclick="showTab('list')">← Hastalara dön</button><span class="badge blue">DEMO PROFİL</span></div>
+ <div class="card"><div class="muted">HASTA BİLGİSİ</div><h1>${p.name}</h1><div class="muted">Demo hasta no: ${p.id}</div>
+ <div class="grid" style="margin-top:14px"><div class="tile"><div class="label">KAN GRUBU</div><div class="value">${p.blood}</div></div><div class="tile"><div class="label">HASTALIKLAR</div><div class="value">${p.disease}</div></div></div>
+ <div class="field"><div class="label">ALERJİLER</div><div class="value">${p.allergy}</div></div>
+ <div class="field"><div class="label">DÜZENLİ İLAÇLAR</div><div class="value">${p.meds}</div></div>
+ <div class="field"><div class="label">ACİL ARANACAK KİŞİ</div><div class="value">${p.contact}</div><div class="muted">${p.phone}</div></div></div>
+ <div class="card"><h2>Kayıp kişi durumu</h2><div id="statusBadge" class="badge">NORMAL • Kayıp bildirimi yok</div><p class="muted">Gerçek sürümde bu bilgi yalnızca doğrulanmış resmî kaynaktan alınmalı ve yetkili hastane personeline gösterilmelidir.</p>
+ <button class="secondary wide" onclick="toggleDemoStatus()">Demo uyarısını aç/kapat</button><div class="muted" style="margin-top:9px">Bu düğme yalnızca arayüzü test eder; resmî kayıt oluşturmaz veya değiştirmez.</div></div>
+ <div class="card"><h2>Demo QR etiketi</h2><div class="row" style="align-items:flex-start"><img class="qrimg" src="${p.qr}" alt="Demo QR kod"><div class="grow"><b>Bu profile ait örnek QR</b><p class="muted">QR içinde sağlık bilgisi veya T.C. kimlik numarası bulunmaz. Yalnızca demo token vardır.</p></div></div></div>`;
+}
+function toggleDemoStatus(){const b=document.getElementById('statusBadge');if(b.classList.contains('red')){b.className='badge';b.textContent='NORMAL • Kayıp bildirimi yok';}else{b.className='badge red';b.textContent='KAYIP BİLDİRİMİ • DEMO UYARISI';}}
+async function startScan(){
+ const msg=document.getElementById('scanMsg');
+ if(!('BarcodeDetector' in window)){msg.textContent='Bu tarayıcı QR algılamayı desteklemiyor. Demo hasta listesinden profili açabilirsin.';return;}
+ try{
+  detector=new BarcodeDetector({formats:['qr_code']});
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+  const video=document.getElementById('video');video.srcObject=stream;await video.play();scanLoop=true;msg.textContent='Kamera açık. Demo QR kodunu göster.';
+  const tick=async()=>{if(!scanLoop)return;try{const codes=await detector.detect(video);if(codes.length){const token=codes[0].rawValue;const p=patients.find(x=>x.token===token);if(p){stopScan();openPatient(p.id);return;}msg.textContent='Bu QR demo kayıtlarında bulunamadı.';}}catch(e){}requestAnimationFrame(tick);};tick();
+ }catch(e){msg.textContent='Kamera açılamadı. HTTPS bağlantısı ve kamera izni gerekir.';}
+}
+function stopScan(){scanLoop=false;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}const v=document.getElementById('video');if(v)v.srcObject=null;}
+</script>
+</body></html>

@@ -1,0 +1,9 @@
+{
+  "appId": "tr.qrmedikal.demo",
+  "appName": "QR Medikal",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false
+  }
+}
