@@ -12,7 +12,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -38,6 +37,10 @@ jobs:
 
       - name: Create Android project
         run: npx cap add android
+
+      - name: Add camera permission
+        run: |
+          sed -i '/<application/i\    <uses-permission android:name="android.permission.CAMERA" />' android/app/src/main/AndroidManifest.xml
 
       - name: Sync app
         run: npx cap sync android
