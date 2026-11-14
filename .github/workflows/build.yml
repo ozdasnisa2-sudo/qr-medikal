@@ -1,3 +1,4 @@
+
 name: Build QR Medikal APK
 
 on:
@@ -23,12 +24,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-            - uses: 
-      android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v3
         with:
-          accept-android-sdk-licenses:
-      'false'
-            - name: Accept Android SDK licenses
+          accept-android-sdk-licenses: 'false'
+
+      - name: Accept Android SDK licenses
         run: yes | sdkmanager --licenses
 
       - name: Install dependencies
