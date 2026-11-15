@@ -7,51 +7,94 @@
 <meta name="theme-color" content="#102c46">
 <title>QR Medikal</title>
 <style>
-:root{--navy:#102c46;--teal:#167c72;--bg:#f3f6f8;--ink:#172b3a;--muted:#687987;--line:#e1e8ed;--red:#b42335}
+:root {
+ --navy:#102c46;
+ --teal:#167c72;
+ --bg:#f3f6f8;
+ --ink:#172b3a;
+ --muted:#687987;
+ --line:#e1e8ed;
+ --red:#b42335;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);font-family:system-ui,sans-serif;color:var(--ink)}
-header{background:var(--navy);color:white;padding:18px;position:sticky;top:0;z-index:3}
-.brand{font-weight:850;font-size:19px;letter-spacing:.5px}
+body{
+ margin:0;background:var(--bg);
+ font-family:system-ui,sans-serif;color:var(--ink)
+}
+header{
+ background:var(--navy);color:white;
+ padding:18px;position:sticky;top:0;z-index:3
+}
+.brand{font-weight:850;font-size:19px}
 .sub{font-size:12px;color:#c8d9e5;margin-top:4px}
 main{max-width:720px;margin:auto;padding:16px 14px 40px}
-.notice{background:#fff6df;border:1px solid #efd28b;color:#654800;padding:11px;border-radius:13px;font-size:12px;line-height:1.5;margin-bottom:14px}
-.card{background:white;border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:13px;box-shadow:0 2px 8px #102c4608}
+.notice{
+ background:#fff6df;border:1px solid #efd28b;
+ color:#654800;padding:11px;border-radius:13px;
+ font-size:12px;line-height:1.5;margin-bottom:14px
+}
+.card{
+ background:white;border:1px solid var(--line);
+ border-radius:17px;padding:15px;margin-bottom:13px;
+ box-shadow:0 2px 8px #102c4608
+}
 h1{font-size:23px;margin:4px 0 14px}
 h2{font-size:17px;margin:0 0 12px}
 .muted{color:var(--muted);font-size:12px}
 button,input,select{font:inherit}
-button{border:0;border-radius:12px;padding:12px 14px;font-weight:700;cursor:pointer}
+button{
+ border:0;border-radius:12px;padding:12px 14px;
+ font-weight:700;cursor:pointer
+}
 .primary{background:var(--teal);color:white}
 .secondary{background:#e9f1f4;color:var(--navy)}
 .danger{background:#fff0f1;color:var(--red)}
 .wide{width:100%}
-input,select{width:100%;border:1px solid #ccd7df;border-radius:12px;padding:13px;margin:7px 0 11px;background:white}
+input,select{
+ width:100%;border:1px solid #ccd7df;
+ border-radius:12px;padding:13px;margin:7px 0 11px;
+ background:white
+}
 label{font-size:11px;color:var(--muted);font-weight:750}
 .row{display:flex;gap:10px;align-items:center}
 .between{justify-content:space-between}
 .grow{flex:1;min-width:0}
 .tabs{display:flex;gap:8px;margin-bottom:14px}
 .tabs button{flex:1}
-.patient{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.patient{
+ display:flex;align-items:center;gap:12px;
+ padding:12px 0;border-bottom:1px solid var(--line)
+}
 .patient:last-child{border:0}
-.avatar{width:42px;height:42px;border-radius:14px;background:#e7f3f1;color:var(--teal);display:grid;place-items:center;font-weight:800}
-.badge{display:inline-block;border-radius:30px;padding:5px 9px;font-size:11px;font-weight:800;background:#e8f5ef;color:#167247}
+.avatar{
+ width:42px;height:42px;border-radius:14px;
+ background:#e7f3f1;color:var(--teal);
+ display:grid;place-items:center;font-weight:800
+}
+.badge{
+ display:inline-block;border-radius:30px;padding:5px 9px;
+ font-size:11px;font-weight:800;background:#e8f5ef;color:#167247
+}
 .badge.red{background:#ffebed;color:#ae2433}
 .badge.blue{background:#eaf1ff;color:#2859a5}
 .field{padding:12px 0;border-bottom:1px solid var(--line)}
-.label{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.4px}
+.label{font-size:11px;color:var(--muted);font-weight:700}
 .value{font-size:15px;font-weight:650;margin-top:4px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .tile{background:#f7f9fa;border-radius:13px;padding:12px}
 .hidden{display:none!important}
-video{width:100%;border-radius:14px;background:#0d1d2b;max-height:330px;object-fit:cover}
-.qrbox{display:flex;justify-content:center;align-items:center;padding:12px}
+video{
+ width:100%;border-radius:14px;background:#0d1d2b;
+ max-height:330px;object-fit:cover
+}
+.qrbox{display:flex;justify-content:center;padding:12px}
 .qrbox canvas,.qrbox img{max-width:180px;height:auto}
 footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
 @media(max-width:380px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
 <header>
  <div class="brand">♥ QR MEDİKAL</div>
  <div class="sub">Hasta bilgi ve acil durum demo uygulaması</div>
@@ -59,63 +102,91 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
 
 <main>
 <div class="notice">
- <b>DEMO UYGULAMASIDIR.</b> Tüm personel ve hasta bilgileri örnektir. Gerçek T.C. kimlik numarası veya sağlık bilgisi girmeyin. Bu sürüm e-Nabız veya resmî sistemlere bağlı değildir.
+ <b>DEMO UYGULAMASIDIR.</b>
+ Tüm personel ve hasta bilgileri örnektir.
+ Gerçek kişisel veya sağlık bilgisi girmeyin.
+ Bu uygulama resmî sistemlere bağlı değildir.
 </div>
 
 <section id="login" class="card">
  <h1>Personel girişi</h1>
- <p class="muted">Görevinize ait demo giriş bilgilerini girin.</p>
- <label>PERSONEL T.C. KİMLİK NUMARASI</label>
- <input id="staffTc" inputmode="numeric" maxlength="11" placeholder="11 haneli numara">
+ <p class="muted">Demo personel bilgilerinizi girin.</p>
+
+ <label>PERSONEL T.C. NUMARASI</label>
+ <input id="staffTc" inputmode="numeric" maxlength="11"
+ placeholder="11 haneli demo numara">
+
  <label>PERSONEL KODU</label>
- <input id="staffCode" inputmode="numeric" placeholder="Personel kodu">
- <button class="primary wide" onclick="loginStaff()">Giriş yap</button>
- <p id="loginMsg" class="muted">Demo giriş bilgileri uygulama içi test içindir.</p>
+ <input id="staffCode" inputmode="numeric"
+ placeholder="Personel kodu">
+
+ <button id="loginButton" class="primary wide" type="button">
+ Giriş yap
+ </button>
+
+ <p id="loginMsg" class="muted">
+ Demo giriş bilgileri uygulama içi test içindir.
+ </p>
 </section>
 
 <section id="app" class="hidden">
+
  <div class="row between" style="margin-bottom:12px">
   <div>
    <div class="muted" id="roleTitle">PERSONEL PANELİ</div>
    <h1 style="margin:2px 0" id="welcome">Hoş geldiniz</h1>
   </div>
-  <button class="secondary" onclick="logout()">Çıkış</button>
+  <button id="logoutButton" class="secondary">Çıkış</button>
  </div>
 
  <div class="tabs" id="registerTabs">
-  <button class="primary" id="tabList" onclick="showTab('list')">Hastalar</button>
-  <button class="secondary" id="tabAdd" onclick="showTab('add')">Hasta ekle</button>
+  <button id="tabList" class="primary">Hastalar</button>
+  <button id="tabAdd" class="secondary">Hasta ekle</button>
  </div>
 
  <section id="listView" class="card hidden">
   <h2>Hasta kayıtları</h2>
-  <input id="search" placeholder="Hasta adıyla ara..." oninput="renderList()">
+  <input id="search" placeholder="Hasta adıyla ara...">
   <div id="patientList"></div>
  </section>
 
  <section id="addView" class="card hidden">
   <h2>Yeni hasta kaydı</h2>
+
   <label>AD SOYAD</label>
   <input id="pName" placeholder="Örnek: Deniz Yılmaz">
+
   <label>KAN GRUBU</label>
   <select id="pBlood">
-   <option>A Rh(+)</option><option>A Rh(-)</option>
-   <option>B Rh(+)</option><option>B Rh(-)</option>
-   <option>AB Rh(+)</option><option>AB Rh(-)</option>
-   <option>0 Rh(+)</option><option>0 Rh(-)</option>
+   <option>A Rh(+)</option>
+   <option>A Rh(-)</option>
+   <option>B Rh(+)</option>
+   <option>B Rh(-)</option>
+   <option>AB Rh(+)</option>
+   <option>AB Rh(-)</option>
+   <option>0 Rh(+)</option>
+   <option>0 Rh(-)</option>
    <option>Belirtilmemiş</option>
   </select>
+
   <label>HASTALIK BİLGİSİ</label>
   <input id="pDisease" placeholder="Demo bilgi">
+
   <label>ALERJİLER</label>
   <input id="pAllergy" placeholder="Demo bilgi">
+
   <label>DÜZENLİ İLAÇLAR</label>
   <input id="pMeds" placeholder="Demo bilgi">
+
   <label>ACİL ARANACAK KİŞİ</label>
-  <input id="pContact" placeholder="Örnek: Ayşe Yılmaz (Anne)">
+  <input id="pContact" placeholder="Örnek: Ayşe Yılmaz">
+
   <label>TELEFON</label>
   <input id="pPhone" placeholder="Örnek: 05XX XXX XX XX">
-  <button class="primary wide" onclick="addPatient()">Kaydı oluştur ve QR hazırla</button>
+
+  <button id="addButton" class="primary wide">
+   Kaydı oluştur ve QR hazırla
+  </button>
   <p id="addMsg" class="muted"></p>
  </section>
 
@@ -123,9 +194,10 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
   <h2>QR kod okutma</h2>
   <p class="muted">Demo QR etiketini kameraya göster.</p>
   <video id="video" playsinline muted></video>
+
   <div class="row" style="margin-top:10px">
-   <button class="primary grow" onclick="startScan()">Kamerayı aç</button>
-   <button class="secondary" onclick="stopScan()">Durdur</button>
+   <button id="startScanButton" class="primary grow">Kamerayı aç</button>
+   <button id="stopScanButton" class="secondary">Durdur</button>
   </div>
   <p id="scanMsg" class="muted">Kamera henüz açılmadı.</p>
  </section>
@@ -137,239 +209,456 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script>
-const demoPatients=[
-{id:"1",name:"Zeynep Yılmaz",blood:"A Rh(+)",disease:"Epilepsi",allergy:"Penisilin",meds:"Demo ilaç bilgisi",contact:"Ayşe Yılmaz (Anne)",phone:"05XX XXX XX 01",token:"QRMED-DEMO-7F3A91"},
-{id:"2",name:"Elif Demir",blood:"0 Rh(-)",disease:"Tip 1 diyabet",allergy:"Lateks",meds:"Demo ilaç bilgisi",contact:"Murat Demir (Baba)",phone:"05XX XXX XX 02",token:"QRMED-DEMO-2B8C44"},
-{id:"3",name:"Ayşe Kaya",blood:"B Rh(+)",disease:"Astım",allergy:"Aspirin",meds:"Demo ilaç bilgisi",contact:"Fatma Kaya (Anne)",phone:"05XX XXX XX 03",token:"QRMED-DEMO-9D1E62"},
-{id:"4",name:"Mehmet Yıldız",blood:"AB Rh(+)",disease:"Hemofili A",allergy:"Fındık",meds:"Demo ilaç bilgisi",contact:"Ahmet Yıldız (Baba)",phone:"05XX XXX XX 04",token:"QRMED-DEMO-5A6F10"},
-{id:"5",name:"Mustafa Çelik",blood:"A Rh(-)",disease:"Kronik böbrek hastalığı",allergy:"Sülfonamid grubu",meds:"Demo ilaç bilgisi",contact:"Emine Çelik (Anne)",phone:"05XX XXX XX 05",token:"QRMED-DEMO-8C3D75"}
+"use strict";
+
+const demoPatients = [
+ {id:"1",name:"Zeynep Yılmaz",blood:"A Rh(+)",disease:"Demo bilgi",allergy:"Demo bilgi",meds:"Demo ilaç bilgisi",contact:"Ayşe Yılmaz",phone:"05XX XXX XX 01",token:"QRMED-DEMO-7F3A91"},
+ {id:"2",name:"Elif Demir",blood:"0 Rh(-)",disease:"Demo bilgi",allergy:"Demo bilgi",meds:"Demo ilaç bilgisi",contact:"Murat Demir",phone:"05XX XXX XX 02",token:"QRMED-DEMO-2B8C44"},
+ {id:"3",name:"Ayşe Kaya",blood:"B Rh(+)",disease:"Demo bilgi",allergy:"Demo bilgi",meds:"Demo ilaç bilgisi",contact:"Fatma Kaya",phone:"05XX XXX XX 03",token:"QRMED-DEMO-9D1E62"},
+ {id:"4",name:"Mehmet Yıldız",blood:"AB Rh(+)",disease:"Demo bilgi",allergy:"Demo bilgi",meds:"Demo ilaç bilgisi",contact:"Ahmet Yıldız",phone:"05XX XXX XX 04",token:"QRMED-DEMO-5A6F10"},
+ {id:"5",name:"Mustafa Çelik",blood:"A Rh(-)",disease:"Demo bilgi",allergy:"Demo bilgi",meds:"Demo ilaç bilgisi",contact:"Emine Çelik",phone:"05XX XXX XX 05",token:"QRMED-DEMO-8C3D75"}
 ];
 
-const staffAccounts=[
+const staffAccounts = [
  {tc:"12345678912",code:"1032",role:"scan",name:"QR Okuma Personeli"},
  {tc:"12345678901",code:"8763",role:"register",name:"Hasta Kayıt Personeli"}
 ];
 
-let patients=loadPatients();
-let currentStaff=null;
-let current=null;
-let stream=null;
-let detector=null;
-let scanLoop=false;
+let patients = loadPatients();
+let currentStaff = null;
+let current = null;
+let stream = null;
+let detector = null;
+let scanLoop = false;
+
+function byId(id){
+ return document.getElementById(id);
+}
 
 function loadPatients(){
  try{
-  const saved=localStorage.getItem("qrmedikal_demo_patients_v2");
-  return saved?JSON.parse(saved):demoPatients.slice();
- }catch(e){return demoPatients.slice();}
+  const saved = localStorage.getItem("qrmedikal_demo_patients_v3");
+  return saved ? JSON.parse(saved) : demoPatients.slice();
+ }catch(e){
+  return demoPatients.slice();
+ }
 }
+
 function savePatients(){
- try{localStorage.setItem("qrmedikal_demo_patients_v2",JSON.stringify(patients));}
- catch(e){alert("Kayıt telefona kaydedilemedi.");}
+ try{
+  localStorage.setItem("qrmedikal_demo_patients_v3",JSON.stringify(patients));
+ }catch(e){
+  alert("Demo kayıt telefona kaydedilemedi.");
+ }
 }
+
 function esc(value){
- return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ return String(value ?? "").replace(/[&<>"']/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+ });
 }
+
+function showError(message){
+ const msg = byId("loginMsg");
+ if(msg) msg.textContent = "Uygulama hatası: " + message;
+}
+
 function loginStaff(){
- const tc=document.getElementById("staffTc").value.trim();
- const code=document.getElementById("staffCode").value.trim();
- const account=staffAccounts.find(x=>x.tc===tc&&x.code===code);
- const msg=document.getElementById("loginMsg");
- if(!account){
-  msg.textContent="Bilgiler eşleşmedi. Demo bilgilerini kontrol et.";
-  return;
- }
- currentStaff=account;
- document.getElementById("login").classList.add("hidden");
- document.getElementById("app").classList.remove("hidden");
- document.getElementById("welcome").textContent=account.name;
- document.getElementById("roleTitle").textContent="PERSONEL PANELİ";
- if(account.role==="scan"){
-  document.getElementById("registerTabs").classList.add("hidden");
-  showScanOnly();
- }else{
-  document.getElementById("registerTabs").classList.remove("hidden");
-  showTab("list");
+ try{
+  const tc = byId("staffTc").value.trim();
+  const code = byId("staffCode").value.trim();
+  const account = staffAccounts.find(function(x){
+   return x.tc === tc && x.code === code;
+  });
+
+  if(!account){
+   byId("loginMsg").textContent =
+    "Bilgiler eşleşmedi. Demo bilgilerini kontrol et.";
+   return;
+  }
+
+  currentStaff = account;
+
+  byId("login").classList.add("hidden");
+  byId("app").classList.remove("hidden");
+  byId("welcome").textContent = account.name;
+  byId("roleTitle").textContent = "PERSONEL PANELİ";
+
+  if(account.role === "scan"){
+   byId("registerTabs").classList.add("hidden");
+   showScanOnly();
+  }else{
+   byId("registerTabs").classList.remove("hidden");
+   showTab("list");
+  }
+
+ }catch(error){
+  showError(error.message || "Giriş işlemi tamamlanamadı.");
  }
 }
+
 function showScanOnly(){
- document.getElementById("listView").classList.add("hidden");
- document.getElementById("addView").classList.add("hidden");
- document.getElementById("detailView").classList.add("hidden");
- document.getElementById("scanView").classList.remove("hidden");
+ byId("listView").classList.add("hidden");
+ byId("addView").classList.add("hidden");
+ byId("detailView").classList.add("hidden");
+ byId("scanView").classList.remove("hidden");
 }
+
 function logout(){
  stopScan();
- currentStaff=null;
- current=null;
- document.getElementById("app").classList.add("hidden");
- document.getElementById("login").classList.remove("hidden");
- document.getElementById("staffTc").value="";
- document.getElementById("staffCode").value="";
- document.getElementById("loginMsg").textContent="Demo giriş bilgileri uygulama içi test içindir.";
+ currentStaff = null;
+ current = null;
+ byId("app").classList.add("hidden");
+ byId("login").classList.remove("hidden");
+ byId("staffTc").value = "";
+ byId("staffCode").value = "";
+ byId("loginMsg").textContent = "Demo giriş bilgileri uygulama içi test içindir.";
 }
+
 function showTab(which){
- if(!currentStaff||currentStaff.role!=="register")return;
+ if(!currentStaff || currentStaff.role !== "register") return;
+
  stopScan();
- document.getElementById("listView").classList.toggle("hidden",which!=="list");
- document.getElementById("addView").classList.toggle("hidden",which!=="add");
- document.getElementById("scanView").classList.add("hidden");
- document.getElementById("detailView").classList.add("hidden");
- document.getElementById("tabList").className=which==="list"?"primary":"secondary";
- document.getElementById("tabAdd").className=which==="add"?"primary":"secondary";
- current=null;
- if(which==="list")renderList();
+ byId("listView").classList.toggle("hidden",which !== "list");
+ byId("addView").classList.toggle("hidden",which !== "add");
+ byId("scanView").classList.add("hidden");
+ byId("detailView").classList.add("hidden");
+
+ byId("tabList").className = which === "list" ? "primary" : "secondary";
+ byId("tabAdd").className = which === "add" ? "primary" : "secondary";
+
+ current = null;
+
+ if(which === "list") renderList();
 }
+
 function renderList(){
- if(!currentStaff||currentStaff.role!=="register")return;
- const q=(document.getElementById("search").value||"").toLocaleLowerCase("tr");
- document.getElementById("patientList").innerHTML=patients.filter(p=>p.name.toLocaleLowerCase("tr").includes(q)).map(p=>`
- <div class="patient">
-  <div class="avatar">${esc(p.name.split(" ").map(x=>x[0]).slice(0,2).join(""))}</div>
-  <div class="grow"><b>${esc(p.name)}</b><div class="muted">Demo hasta no: ${esc(p.id)}</div></div>
-  <button class="secondary" onclick="openPatient('${esc(p.id)}')">Aç</button>
- </div>`).join("")||'<p class="muted">Kayıt bulunamadı.</p>';
+ if(!currentStaff || currentStaff.role !== "register") return;
+
+ const q = (byId("search").value || "").toLocaleLowerCase("tr");
+
+ byId("patientList").innerHTML = patients
+  .filter(function(p){
+   return p.name.toLocaleLowerCase("tr").includes(q);
+  })
+  .map(function(p){
+   return `
+    <div class="patient">
+     <div class="avatar">${esc(p.name.split(" ").map(x=>x[0]).slice(0,2).join(""))}</div>
+     <div class="grow">
+      <b>${esc(p.name)}</b>
+      <div class="muted">Demo hasta no: ${esc(p.id)}</div>
+     </div>
+     <button class="secondary openPatientButton" data-id="${esc(p.id)}">Aç</button>
+    </div>`;
+  }).join("") || '<p class="muted">Kayıt bulunamadı.</p>';
+
+ document.querySelectorAll(".openPatientButton").forEach(function(button){
+  button.addEventListener("click",function(){
+   openPatient(button.dataset.id);
+  });
+ });
 }
+
 function addPatient(){
- if(!currentStaff||currentStaff.role!=="register")return;
- const name=document.getElementById("pName").value.trim();
- if(!name){document.getElementById("addMsg").textContent="Lütfen hasta adını yaz.";return;}
- const id="D"+Date.now().toString(36).toUpperCase();
- const token="QRMED-"+crypto.randomUUID().replace(/-/g,"").slice(0,12).toUpperCase();
- const p={
-  id,name,
-  blood:document.getElementById("pBlood").value,
-  disease:document.getElementById("pDisease").value.trim()||"Belirtilmemiş",
-  allergy:document.getElementById("pAllergy").value.trim()||"Belirtilmemiş",
-  meds:document.getElementById("pMeds").value.trim()||"Belirtilmemiş",
-  contact:document.getElementById("pContact").value.trim()||"Belirtilmemiş",
-  phone:document.getElementById("pPhone").value.trim()||"Belirtilmemiş",
-  token
- };
- patients.push(p);
- savePatients();
- ["pName","pDisease","pAllergy","pMeds","pContact","pPhone"].forEach(id=>document.getElementById(id).value="");
- document.getElementById("addMsg").textContent="Demo hasta kaydı oluşturuldu.";
- openPatient(p.id);
-}
-function openPatient(id){
- stopScan();
- if(!currentStaff)return;
- if(currentStaff.role==="scan"&&id===undefined)return;
- current=patients.find(p=>p.id===id);
- if(!current)return;
- document.getElementById("listView").classList.add("hidden");
- document.getElementById("addView").classList.add("hidden");
- document.getElementById("scanView").classList.add("hidden");
- document.getElementById("detailView").classList.remove("hidden");
- renderDetail();
-}
-function renderDetail(){
- const p=current;
- const isRegister=currentStaff.role==="register";
- document.getElementById("detailView").innerHTML=`
- <div class="row between" style="margin-bottom:12px">
-  <button class="secondary" onclick="${isRegister?"showTab('list'):"showScanOnly()"}">← Geri dön</button>
-  <span class="badge blue">DEMO PROFİL</span>
- </div>
- <div class="card">
-  <div class="muted">HASTA BİLGİSİ</div>
-  <h1>${esc(p.name)}</h1>
-  <div class="muted">Demo hasta no: ${esc(p.id)}</div>
-  <div class="grid" style="margin-top:14px">
-   <div class="tile"><div class="label">KAN GRUBU</div><div class="value">${esc(p.blood)}</div></div>
-   <div class="tile"><div class="label">HASTALIKLAR</div><div class="value">${esc(p.disease)}</div></div>
-  </div>
-  <div class="field"><div class="label">ALERJİLER</div><div class="value">${esc(p.allergy)}</div></div>
-  <div class="field"><div class="label">DÜZENLİ İLAÇLAR</div><div class="value">${esc(p.meds)}</div></div>
-  <div class="field"><div class="label">ACİL ARANACAK KİŞİ</div><div class="value">${esc(p.contact)}</div><div class="muted">${esc(p.phone)}</div></div>
- </div>
- <div class="card">
-  <h2>Kayıp kişi durumu</h2>
-  <div id="statusBadge" class="badge">NORMAL • Kayıp bildirimi yok</div>
-  <p class="muted">Bu yalnızca demo uyarısıdır; resmî kayıt sorgulaması yapılmaz.</p>
-  ${isRegister?'<button class="secondary wide" onclick="toggleDemoStatus()">Demo uyarısını aç/kapat</button>':''}
- </div>
- ${isRegister?'<div class="card"><h2>Demo QR etiketi</h2><p class="muted">Bu QR yalnızca rastgele demo kayıt kodu içerir.</p><div id="patientQr" class="qrbox"></div><button class="secondary wide" onclick="printQr()">QR etiketini yazdır</button></div>':''}
- `;
- if(isRegister)makeQr(p.token);
-}
-function makeQr(token){
- const el=document.getElementById("patientQr");
- if(!el)return;
- if(typeof QRCode==="undefined"){
-  el.textContent="QR oluşturmak için internet bağlantısı gerekiyor.";
+ if(!currentStaff || currentStaff.role !== "register") return;
+
+ const name = byId("pName").value.trim();
+
+ if(!name){
+  byId("addMsg").textContent = "Lütfen demo hasta adını yaz.";
   return;
  }
- el.innerHTML="";
- new QRCode(el,{text:token,width:170,height:170,correctLevel:QRCode.CorrectLevel.M});
+
+ const id = "D" + Date.now().toString(36).toUpperCase();
+ const randomPart = Math.random().toString(36).slice(2,14).toUpperCase();
+ const token = "QRMED-" + randomPart;
+
+ const p = {
+  id:id,
+  name:name,
+  blood:byId("pBlood").value,
+  disease:byId("pDisease").value.trim() || "Belirtilmemiş",
+  allergy:byId("pAllergy").value.trim() || "Belirtilmemiş",
+  meds:byId("pMeds").value.trim() || "Belirtilmemiş",
+  contact:byId("pContact").value.trim() || "Belirtilmemiş",
+  phone:byId("pPhone").value.trim() || "Belirtilmemiş",
+  token:token
+ };
+
+ patients.push(p);
+ savePatients();
+
+ ["pName","pDisease","pAllergy","pMeds","pContact","pPhone"].forEach(function(id){
+  byId(id).value = "";
+ });
+
+ byId("addMsg").textContent = "Demo kayıt oluşturuldu.";
+ openPatient(p.id);
 }
+
+function openPatient(id){
+ stopScan();
+ if(!currentStaff) return;
+
+ const found = patients.find(function(p){
+  return String(p.id) === String(id);
+ });
+
+ if(!found) return;
+
+ current = found;
+
+ byId("listView").classList.add("hidden");
+ byId("addView").classList.add("hidden");
+ byId("scanView").classList.add("hidden");
+ byId("detailView").classList.remove("hidden");
+
+ renderDetail();
+}
+
+function renderDetail(){
+ const p = current;
+ if(!p || !currentStaff) return;
+
+ const isRegister = currentStaff.role === "register";
+
+ byId("detailView").innerHTML = `
+  <div class="row between" style="margin-bottom:12px">
+   <button id="backButton" class="secondary">← Geri dön</button>
+   <span class="badge blue">DEMO PROFİL</span>
+  </div>
+
+  <div class="card">
+   <div class="muted">HASTA BİLGİSİ</div>
+   <h1>${esc(p.name)}</h1>
+   <div class="muted">Demo hasta no: ${esc(p.id)}</div>
+
+   <div class="grid" style="margin-top:14px">
+    <div class="tile">
+     <div class="label">KAN GRUBU</div>
+     <div class="value">${esc(p.blood)}</div>
+    </div>
+    <div class="tile">
+     <div class="label">HASTALIK BİLGİSİ</div>
+     <div class="value">${esc(p.disease)}</div>
+    </div>
+   </div>
+
+   <div class="field">
+    <div class="label">ALERJİLER</div>
+    <div class="value">${esc(p.allergy)}</div>
+   </div>
+
+   <div class="field">
+    <div class="label">DÜZENLİ İLAÇLAR</div>
+    <div class="value">${esc(p.meds)}</div>
+   </div>
+
+   <div class="field">
+    <div class="label">ACİL ARANACAK KİŞİ</div>
+    <div class="value">${esc(p.contact)}</div>
+    <div class="muted">${esc(p.phone)}</div>
+   </div>
+  </div>
+
+  <div class="card">
+   <h2>Demo durum bildirimi</h2>
+   <div id="statusBadge" class="badge">NORMAL • Demo uyarısı yok</div>
+   <p class="muted">Bu alan resmî bir sorgulama yapmaz.</p>
+   ${isRegister ? '<button id="statusButton" class="secondary wide">Demo uyarısını aç/kapat</button>' : ''}
+  </div>
+
+  ${isRegister ? `
+   <div class="card">
+    <h2>Demo QR etiketi</h2>
+    <p class="muted">Bu QR yalnızca rastgele demo kayıt kodu içerir.</p>
+    <div id="patientQr" class="qrbox"></div>
+    <button id="printButton" class="secondary wide">QR etiketini yazdır</button>
+   </div>` : ''}
+ `;
+
+ byId("backButton").addEventListener("click",function(){
+  if(isRegister) showTab("list");
+  else showScanOnly();
+ });
+
+ if(isRegister){
+  byId("statusButton").addEventListener("click",toggleDemoStatus);
+  byId("printButton").addEventListener("click",printQr);
+  makeQr(p.token);
+ }
+}
+
+function makeQr(token){
+ const el = byId("patientQr");
+ if(!el) return;
+
+ if(typeof QRCode === "undefined"){
+  el.textContent = "QR oluşturmak için internet bağlantısı gerekiyor.";
+  return;
+ }
+
+ el.innerHTML = "";
+
+ new QRCode(el,{
+  text:token,
+  width:170,
+  height:170,
+  correctLevel:QRCode.CorrectLevel.M
+ });
+}
+
 function printQr(){
- if(!current||currentStaff.role!=="register")return;
- const win=window.open("","_blank");
- if(!win){alert("Yazdırma penceresi açılamadı.");return;}
- const qr=document.querySelector("#patientQr canvas");
- const img=document.querySelector("#patientQr img");
- const src=img?img.src:(qr?qr.toDataURL():"");
- win.document.write("<html><body style='font-family:Arial;text-align:center;padding:25px'><h2>QR MEDİKAL • DEMO ETİKET</h2><p>"+esc(current.name)+"</p><img width='200' src='"+src+"'><p>Demo kayıt kodu</p></body></html>");
+ if(!current || !currentStaff || currentStaff.role !== "register") return;
+
+ const qr = document.querySelector("#patientQr canvas");
+ const img = document.querySelector("#patientQr img");
+ const src = img ? img.src : (qr ? qr.toDataURL() : "");
+
+ if(!src){
+  alert("Önce QR kodun oluşturulmasını bekle.");
+  return;
+ }
+
+ const win = window.open("","_blank");
+
+ if(!win){
+  alert("Yazdırma penceresi açılamadı.");
+  return;
+ }
+
+ win.document.write(
+  "<html><body style='font-family:Arial;text-align:center;padding:25px'>" +
+  "<h2>QR MEDİKAL • DEMO ETİKET</h2>" +
+  "<p>" + esc(current.name) + "</p>" +
+  "<img width='200' src='" + src + "'>" +
+  "<p>Demo kayıt kodu</p></body></html>"
+ );
+
  win.document.close();
  win.print();
 }
+
 function toggleDemoStatus(){
- const b=document.getElementById("statusBadge");
- if(!b)return;
+ const b = byId("statusBadge");
+ if(!b) return;
+
  if(b.classList.contains("red")){
-  b.className="badge";
-  b.textContent="NORMAL • Kayıp bildirimi yok";
+  b.className = "badge";
+  b.textContent = "NORMAL • Demo uyarısı yok";
  }else{
-  b.className="badge red";
-  b.textContent="KAYIP BİLDİRİMİ • DEMO UYARISI";
+  b.className = "badge red";
+  b.textContent = "DEMO UYARISI AKTİF";
  }
 }
+
 async function startScan(){
- if(!currentStaff||currentStaff.role!=="scan")return;
- const msg=document.getElementById("scanMsg");
+ if(!currentStaff || currentStaff.role !== "scan") return;
+
+ const msg = byId("scanMsg");
+
  if(!("BarcodeDetector" in window)){
-  msg.textContent="Bu cihazın tarayıcısı QR algılamayı desteklemiyor.";
+  msg.textContent = "Bu cihaz QR algılamayı desteklemiyor.";
   return;
  }
+
+ if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+  msg.textContent = "Kamera özelliği bu ortamda kullanılamıyor.";
+  return;
+ }
+
  try{
-  detector=new BarcodeDetector({formats:["qr_code"]});
-  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
-  const video=document.getElementById("video");
-  video.srcObject=stream;
+  detector = new BarcodeDetector({formats:["qr_code"]});
+
+  stream = await navigator.mediaDevices.getUserMedia({
+   video:{facingMode:{ideal:"environment"}},
+   audio:false
+  });
+
+  const video = byId("video");
+  video.srcObject = stream;
   await video.play();
-  scanLoop=true;
-  msg.textContent="Kamera açık. Demo QR kodunu göster.";
-  const tick=async()=>{
-   if(!scanLoop)return;
+
+  scanLoop = true;
+  msg.textContent = "Kamera açık. Demo QR kodunu göster.";
+
+  const tick = async function(){
+   if(!scanLoop) return;
+
    try{
-    const codes=await detector.detect(video);
+    const codes = await detector.detect(video);
+
     if(codes.length){
-     const token=codes[0].rawValue;
-     const p=patients.find(x=>x.token===token);
+     const token = codes[0].rawValue;
+     const p = patients.find(function(x){
+      return x.token === token;
+     });
+
      if(p){
       stopScan();
       openPatient(p.id);
       return;
      }
-     msg.textContent="Bu QR demo kayıtlarında bulunamadı.";
+
+     msg.textContent = "Bu QR demo kayıtlarında bulunamadı.";
     }
-   }catch(e){}
-   if(scanLoop)requestAnimationFrame(tick);
+   }catch(error){
+    msg.textContent = "QR okunurken hata oluştu.";
+   }
+
+   if(scanLoop) requestAnimationFrame(tick);
   };
+
   tick();
- }catch(e){
-  msg.textContent="Kamera açılamadı. Kamera iznini kontrol et.";
+
+ }catch(error){
+  msg.textContent = "Kamera açılamadı: " + (error.message || "İzinleri kontrol et.");
  }
 }
+
 function stopScan(){
- scanLoop=false;
- if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
- const v=document.getElementById("video");
- if(v)v.srcObject=null;
+ scanLoop = false;
+
+ if(stream){
+  stream.getTracks().forEach(function(track){
+   track.stop();
+  });
+  stream = null;
+ }
+
+ const video = byId("video");
+ if(video) video.srcObject = null;
 }
+
+function connectButtons(){
+ byId("loginButton").addEventListener("click",loginStaff);
+ byId("logoutButton").addEventListener("click",logout);
+ byId("tabList").addEventListener("click",function(){showTab("list");});
+ byId("tabAdd").addEventListener("click",function(){showTab("add");});
+ byId("addButton").addEventListener("click",addPatient);
+ byId("search").addEventListener("input",renderList);
+ byId("startScanButton").addEventListener("click",startScan);
+ byId("stopScanButton").addEventListener("click",stopScan);
+
+ byId("staffCode").addEventListener("keydown",function(event){
+  if(event.key === "Enter") loginStaff();
+ });
+}
+
+window.addEventListener("error",function(event){
+ showError(event.message || "Bilinmeyen JavaScript hatası.");
+});
+
+window.addEventListener("DOMContentLoaded",function(){
+ try{
+  connectButtons();
+ }catch(error){
+  showError(error.message || "Butonlar bağlanamadı.");
+ }
+});
 </script>
 </body>
 </html>
